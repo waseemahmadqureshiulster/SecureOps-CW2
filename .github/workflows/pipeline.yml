@@ -1,4 +1,4 @@
-name: SecureOps MLOps Pipeline (Train & Deploy)
+name: SecureOps Full MLOps Pipeline
 
 on:
   push:
@@ -6,30 +6,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  train-and-deploy:
+  test-train-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Check out repo
+    - name: 1. Check out repo
       uses: actions/checkout@v2
 
-    - name: Azure Login
+    - name: 2. Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: 3. Install Dependencies
+      run: pip install pytest pandas scikit-learn
+
+    - name: 4. Run Unit Tests (Quality Assurance)
+      run: pytest src/test_model.py
+
+    - name: 5. Azure Login
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Install Azure ML Extension
+    - name: 6. Install ML Extension
       run: |
         az extension add -n ml
         az configure --defaults group=RG-SecureOps-Final workspace=SecureOps-Workspace location=uksouth
 
-    - name: 1. Submit Training Job
-      run: |
-        az ml job create --file job_command.yml --stream
+    - name: 7. Submit Cloud Training
+      run: az ml job create --file job_command.yml --stream
 
-    - name: 2. Create Endpoint (The Door)
-      run: |
-        az ml online-endpoint create --name secureops-endpoint-final --auth-mode key --yes || echo "Endpoint might already exist, proceeding..."
+    - name: 8. Create/Update Endpoint
+      run: az ml online-endpoint create --name secureops-endpoint-final --auth-mode key --yes || true
 
-    - name: 3. Deploy Model (The Server)
-      run: |
-        az ml online-deployment create --file deployment.yml --all-traffic --yes
+    - name: 9. Deploy Model to Production
+      run: az ml online-deployment create --file deployment.yml --all-traffic --yes
