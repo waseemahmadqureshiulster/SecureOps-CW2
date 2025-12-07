@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: final-deployment
-endpoint_name: secureops-endpoint-xheik01
+endpoint_name: secureops-endpoint-final
 model: azureml:cidds-ids-model:1
 code_configuration:
   code: src/

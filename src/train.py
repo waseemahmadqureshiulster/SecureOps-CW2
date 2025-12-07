@@ -74,7 +74,7 @@ def main():
         mlflow.log_metric("accuracy", acc)
         
         # Register the model in MLflow
-        mlflow.sklearn.log_model(clf, "model")
+        mlflow.sklearn.log_model(clf, "model", registered_model_name="CIDDS_IDS_Model")
 
 if __name__ == "__main__":
     main()

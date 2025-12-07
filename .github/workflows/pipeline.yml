@@ -1,0 +1,27 @@
+name: SecureOps MLOps Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # Allows you to run it manually button
+
+jobs:
+  build-and-train:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v2
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Install Azure ML Extension
+      run: |
+        az extension add -n ml
+        az configure --defaults group=RG-SecureOps-Final workspace=SecureOps-Workspace location=uksouth
+
+    - name: Submit Training Job
+      run: |
+        az ml job create --file job_command.yml --stream

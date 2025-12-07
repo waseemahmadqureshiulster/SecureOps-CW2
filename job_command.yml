@@ -4,7 +4,7 @@ command: python src/train.py
 environment:
   image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
   conda_file: environment/conda.yaml
-compute: azureml:cw2-pc
-display_name: cidds-training-fixed
-experiment_name: secureops-experiment
-description: Training Random Forest (Fixed Data Path)
+compute: azureml:cpu-cluster
+display_name: cidds-training-final
+experiment_name: secureops-fresh-start
+description: Training Random Forest (Clean Setup)
