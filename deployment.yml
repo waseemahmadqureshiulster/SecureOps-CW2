@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: secureops-deploy
-endpoint_name: secureops-endpoint-v2
+endpoint_name: secureops-endpoint-v3
 model: azureml:CIDDS_IDS_Model@latest
 code_configuration:
   code: src
@@ -8,5 +8,5 @@ code_configuration:
 environment: 
   image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04
   conda_file: environment/conda.yaml
-instance_type: Standard_DS11_v2
+instance_type: Standard_DS2_v2
 instance_count: 1
