@@ -36,9 +36,10 @@ jobs:
     - name: 7. Submit Cloud Training
       run: az ml job create --file job_command.yml --stream
 
-    - name: 8. Create Endpoint (The Door)
-      # Updated to v3
-      run: az ml online-endpoint create --name secureops-endpoint-v3 --auth-mode key
+    - name: 8. Create or Update Endpoint (The Door)
+      run: |
+        az ml online-endpoint create --name secureops-endpoint-v3 --auth-mode key || \
+        az ml online-endpoint update --name secureops-endpoint-v3 --auth-mode key
 
     - name: 9. Deploy Model to Production
       run: az ml online-deployment create --file deployment.yml --all-traffic
