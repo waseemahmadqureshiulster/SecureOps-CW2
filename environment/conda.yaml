@@ -1,13 +1,14 @@
 name: secureops-env
 channels:
-  - defaults
+  - conda-forge
 dependencies:
   - python=3.8
   - pip
   - pip:
+    - numpy
+    - pandas
+    - scikit-learn
     - mlflow
     - azureml-mlflow
-    - scikit-learn
-    - pandas
-    - numpy
+    - azureml-inference-server-http
     - joblib

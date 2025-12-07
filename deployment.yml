@@ -1,0 +1,12 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: final-deployment
+endpoint_name: secureops-endpoint-xheik01
+model: azureml:cidds-ids-model:1
+code_configuration:
+  code: src/
+  scoring_script: score.py
+environment: 
+  image: mcr.microsoft.com/azureml/minimal-ubuntu20.04-py38-cpu-inference:latest
+  conda_file: environment/conda.yaml
+instance_type: Standard_DS1_v2
+instance_count: 1

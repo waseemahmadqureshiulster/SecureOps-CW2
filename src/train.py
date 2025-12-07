@@ -13,7 +13,7 @@ from sklearn.metrics import accuracy_score, classification_report
 
 def main():
     # 1. Enable MLflow Autologging
-    mlflow.sklearn.autolog()
+    mlflow.sklearn.autolog(log_models=False)
 
     # 2. Load Data
     print("Loading data...")
@@ -74,7 +74,7 @@ def main():
         mlflow.log_metric("accuracy", acc)
         
         # Register the model in MLflow
-        mlflow.sklearn.log_model(clf, "model", registered_model_name="CIDDS_IDS_Model")
+        mlflow.sklearn.log_model(clf, "model")
 
 if __name__ == "__main__":
     main()
