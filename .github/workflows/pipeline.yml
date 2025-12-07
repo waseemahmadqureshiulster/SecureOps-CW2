@@ -38,8 +38,8 @@ jobs:
 
     - name: 8. Create or Update Endpoint (The Door)
       run: |
-        az ml online-endpoint create --name secureops-endpoint-v3 --auth-mode key || \
-        az ml online-endpoint update --name secureops-endpoint-v3 --auth-mode key
+        az ml online-endpoint create --name secureops-endpoint-v3 --auth-mode key 2>/dev/null || \
+        az ml online-endpoint update --name secureops-endpoint-v3
 
     - name: 9. Deploy Model to Production
       run: az ml online-deployment create --file deployment.yml --all-traffic
