@@ -5,10 +5,6 @@ model: azureml:CIDDS_IDS_Model@latest
 code_configuration:
   code: src
   scoring_script: score.py
-environment: 
-  # FIX: Use the Inference image, NOT the OpenMPI training image
-  image: mcr.microsoft.com/azureml/minimal-ubuntu20.04-py38-cpu-inference:latest
-  conda_file: environment/conda.yaml
-# FIX: Use DS1 to save quota/credits (optional, but recommended)
-instance_type: Standard_DS1_v2
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu@latest
+instance_type: Standard_DS2_v2
 instance_count: 1
