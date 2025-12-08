@@ -1,0 +1,14 @@
+name: secureops-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - mlflow==2.11.1
+    - azureml-mlflow==1.55.0
+    - scikit-learn==1.3.0
+    - pandas
+    - numpy
+    - joblib
+    - azureml-core
