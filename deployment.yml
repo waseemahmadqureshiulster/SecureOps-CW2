@@ -5,6 +5,8 @@ model: azureml:CIDDS_IDS_Model@latest
 code_configuration:
   code: src
   scoring_script: score.py
-environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu@latest
+environment: 
+  image: mcr.microsoft.com/azureml/minimal-ubuntu20.04-py38-cpu-inference:latest
+  conda_file: environment/conda.yaml
 instance_type: Standard_DS2_v2
 instance_count: 1
